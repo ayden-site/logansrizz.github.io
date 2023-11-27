@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rizz Experience</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #madeByAyden {
+      position: fixed;
+      bottom: 10px;
+      color: red;
+      animation: hoverUpDown 2s infinite;
+    }
+
+    #rizzText {
+      cursor: pointer;
+    }
+
+    @keyframes hoverUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="rizzText" onclick="playRizz()">Click me to see rizz.</div>
+  <audio id="rizzAudio" src="https://raw.githubusercontent.com/iDarkGaming/bah/main/lv_0_20231111153023.mp3"></audio>
+  <script>
+    const rizzText = document.getElementById('rizzText');
+    const rizzAudio = document.getElementById('rizzAudio');
+
+    function playRizz() {
+      // Fade out the text
+      rizzText.style.transition = 'opacity 0.3s';
+      rizzText.style.opacity = '0';
+
+      // Play audio
+      rizzAudio.play();
+
+      // Display gif
+      const rizzGif = document.createElement('img');
+      rizzGif.src = 'https://raw.githubusercontent.com/iDarkGaming/bah/main/ezgif-3-5aaa63c4fb.gif';
+      rizzGif.style.width = '100%';
+      rizzGif.style.height = 'auto';
+      document.body.appendChild(rizzGif);
+
+      // Set timeout to handle the end of audio and gif
+      setTimeout(() => {
+        rizzGif.remove();
+
+        // Fade in the text
+        rizzText.style.opacity = '1';
+      }, rizzAudio.duration * 1000);
+    }
+  </script>
+  <div id="madeByAyden">Made by Ayden Vergara</div>
+</body>
+</html>
