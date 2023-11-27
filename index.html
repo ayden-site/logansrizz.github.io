@@ -25,25 +25,15 @@
     }
 
     #bottom-text {
-      position: fixed;
+      position: absolute;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       color: red;
       font-family: 'Courier New', monospace;
       font-size: 18px;
-      animation: hoverAnimation 2s infinite alternate;
       text-align: center;
       width: 100%;
-    }
-
-    @keyframes hoverAnimation {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-10px);
-      }
     }
   </style>
 </head>
@@ -67,7 +57,6 @@
       gif.style.zIndex = "9999";
 
       var audio = new Audio("https://raw.githubusercontent.com/iDarkGaming/bah/main/lv_0_20231111153023.mp3");
-      audio.loop = true;
       audio.play();
 
       document.body.appendChild(gif);
