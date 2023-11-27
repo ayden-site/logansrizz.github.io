@@ -1,2 +1,2 @@
 # logansrizz.github.io
-Lol
+website code for **https://logansrizz.github.io**
