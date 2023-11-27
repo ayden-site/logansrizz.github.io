@@ -3,71 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rizz Experience</title>
+  <title>Click to See Rizz</title>
   <style>
     body {
       background-color: black;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
+      overflow: hidden;
     }
 
-    #madeByAyden {
-      position: fixed;
-      bottom: 10px;
-      color: red;
-      animation: hoverUpDown 2s infinite;
-    }
-
-    #rizzText {
+    #center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-family: 'Arial', sans-serif;
+      font-size: 28px;
       cursor: pointer;
+      text-align: center;
+      transition: opacity 0.3s ease-out;
     }
 
-    @keyframes hoverUpDown {
-      0%, 100% {
+    #bottom-text {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      color: red;
+      font-family: 'Courier New', monospace;
+      font-size: 18px;
+      animation: hoverAnimation 2s infinite alternate;
+    }
+
+    @keyframes hoverAnimation {
+      0% {
         transform: translateY(0);
       }
-      50% {
+      100% {
         transform: translateY(-10px);
       }
     }
   </style>
 </head>
 <body>
-  <div id="rizzText" onclick="playRizz()">Click me to see rizz.</div>
-  <audio id="rizzAudio" src="https://raw.githubusercontent.com/iDarkGaming/bah/main/lv_0_20231111153023.mp3"></audio>
+  <div id="center-text" onclick="showGifAndAudio()">Click me to see rizz</div>
+  <div id="bottom-text">Crafted by Ayden</div>
+
   <script>
-    const rizzText = document.getElementById('rizzText');
-    const rizzAudio = document.getElementById('rizzAudio');
+    function showGifAndAudio() {
+      var centerText = document.getElementById("center-text");
+      centerText.style.opacity = "0";
 
-    function playRizz() {
-      // Fade out the text
-      rizzText.style.transition = 'opacity 0.3s';
-      rizzText.style.opacity = '0';
+      var gif = document.createElement("img");
+      gif.src = "https://raw.githubusercontent.com/iDarkGaming/bah/main/ezgif-3-5aaa63c4fb.gif";
+      gif.style.width = "100%";
+      gif.style.height = "auto";
+      gif.style.position = "fixed";
+      gif.style.top = "0";
+      gif.style.left = "0";
+      gif.style.zIndex = "9999";
 
-      // Play audio
-      rizzAudio.play();
+      var audio = new Audio("https://raw.githubusercontent.com/iDarkGaming/bah/main/lv_0_20231111153023.mp3");
+      audio.loop = true;
+      audio.play();
 
-      // Display gif
-      const rizzGif = document.createElement('img');
-      rizzGif.src = 'https://raw.githubusercontent.com/iDarkGaming/bah/main/ezgif-3-5aaa63c4fb.gif';
-      rizzGif.style.width = '100%';
-      rizzGif.style.height = 'auto';
-      document.body.appendChild(rizzGif);
+      document.body.appendChild(gif);
 
-      // Set timeout to handle the end of audio and gif
-      setTimeout(() => {
-        rizzGif.remove();
-
-        // Fade in the text
-        rizzText.style.opacity = '1';
-      }, rizzAudio.duration * 1000);
+      audio.addEventListener("ended", function() {
+        document.body.removeChild(gif);
+        centerText.style.opacity = "1";
+      });
     }
   </script>
-  <div id="madeByAyden">Made by Ayden Vergara</div>
 </body>
 </html>
